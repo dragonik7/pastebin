@@ -11,7 +11,8 @@ return new class extends Migration {
 		Schema::create('codes', function (Blueprint $table)
 		{
 			$table->id();
-			$table->string('title');
+			$table->string('title')->nullable();
+			$table->longText('code');
 			$table->foreignId('user_id')->constrained('users')->nullable()->cascadeOnUpdate()->cascadeOnDelete();
 			$table->integer('access_id');
 			$table->dateTime('expiration_time')->nullable();
