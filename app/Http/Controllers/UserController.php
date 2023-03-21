@@ -7,6 +7,7 @@ use App\Http\Requests\User\RegisterUserRequest;
 use App\Http\Resources\User\InfoUserResource;
 use App\Http\Resources\User\LoginUserResource;
 use App\Http\Service\UserService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -18,16 +19,22 @@ class UserController extends Controller
 	 *
 	 * @param  RegisterUserRequest  $request
 	 * @param  UserService  $createService
-	 * @return Response
+	 * @return InfoUserResource
 	 */
-    public function store(RegisterUserRequest $request, UserService $createService)
+    public function store(RegisterUserRequest $request, UserService $createService): InfoUserResource
     {
 		$user = $createService->register($request);
-		return InfoUserResource::make($user)->response()->withCookie($user->token);
+		return InfoUserResource::make($user);
     }
 
-	public function login(LoginUserRequest $loginUserRequest, UserService $loginService){
+	/**
+	 * @param  LoginUserRequest  $loginUserRequest
+	 * @param  UserService  $loginService
+	 * @return LoginUserResource
+	 */
+	public function login(LoginUserRequest $loginUserRequest, UserService $loginService): LoginUserResource
+	{
 		$token = $loginService->login($loginUserRequest);
-		return LoginUserResource::make($token)->response()->withCookie($token->plainTextToken);
+		return LoginUserResource::make($token);
 	}
 }

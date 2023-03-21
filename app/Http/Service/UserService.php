@@ -18,17 +18,12 @@ class UserService
 	/**
 	 * @param  RegisterUserRequest  $request
 	 * @return User
-	 * @throws HttpResponseException
 	 */
 	public function register(RegisterUserRequest $request): User
 	{
 		$data = $request->toArray();
 		$user = User::create($data);
 		event(new Registered($user));
-		$user->token = $user->createToken(
-			name     : $request->ip() . "|" . $request->userAgent(),
-			expiresAt: Carbon::parse(Carbon::now()->add('3month'))
-		);
 		return $user;
 	}
 
@@ -38,7 +33,7 @@ class UserService
 	 */
 	public function login(LoginUserRequest $request): NewAccessToken
 	{
-		$user = User::withTrashed()->firstWhere('email', '=', $request->email);
+		$user = User::query()->withTrashed()->firstWhere('email', '=', $request->email);
 		if ($user || Hash::check($request->password, $user->password)) {
 			return $user->createToken(
 				name     : $request->ip() . "|" . $request->userAgent(),

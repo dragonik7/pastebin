@@ -7,6 +7,9 @@ use App\Http\Requests\BaseApiRequest;
 class LoginUserRequest extends BaseApiRequest
 {
 
+	/**
+	 * @return array<string, array<string>>
+	 */
 	public function rules(): array
 	{
 		return [

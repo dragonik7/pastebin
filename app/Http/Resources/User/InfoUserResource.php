@@ -12,7 +12,7 @@ class InfoUserResource extends JsonResource
 
 	/**
 	 * @param  Request  $request
-	 * @return array
+	 * @return array<string, int|string>
 	 */
 	public function toArray($request)
 	{
@@ -20,7 +20,6 @@ class InfoUserResource extends JsonResource
 			'id'           => $this->id,
 			'name'         => $this->name,
 			'email'        => $this->email,
-			'token'        => $this->token
 		];
 	}
 }
