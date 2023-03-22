@@ -12,7 +12,8 @@ return new class extends Migration {
 		{
 			$table->id();
 			$table->string('title');
-			$table->foreignId('code_id')->constrained('codes')->cascadeOnUpdate()->cascadeOnDelete();
+			$table->foreignId('user_id')->constrained('users')->nullable();
+			$table->foreignUUid('code_id')->constrained('codes')->cascadeOnUpdate()->cascadeOnDelete();
 			$table->timestamps();
 		});
 	}
