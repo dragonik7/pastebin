@@ -28,6 +28,10 @@ class PlatformProvider extends OrchidServiceProvider
     public function registerMainMenu(): array
     {
         return [
+			Menu::make('Codes')
+				->icon('code')
+				->route('platform.codes'),
+
             Menu::make('Example screen')
                 ->icon('monitor')
                 ->route('platform.example')
@@ -71,7 +75,7 @@ class PlatformProvider extends OrchidServiceProvider
             Menu::make('Documentation')
                 ->title('Docs')
                 ->icon('docs')
-                ->url('https://orchid.software/en/docs'),
+                ->url('https://orchid.software/ru/docs'),
 
             Menu::make('Changelog')
                 ->icon('shuffle')
