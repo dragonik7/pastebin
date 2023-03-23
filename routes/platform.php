@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use App\Models\Code;
+use App\Orchid\Screens\Code\CodeEditScreen;
 use App\Orchid\Screens\Code\CodeListScreen;
 use App\Orchid\Screens\Examples\ExampleCardsScreen;
 use App\Orchid\Screens\Examples\ExampleChartsScreen;
@@ -31,18 +33,37 @@ use Tabuna\Breadcrumbs\Trail;
 */
 
 // Main
-Route::screen('/codes', CodeListScreen::class)
-    ->name('platform.codes');
 
 Route::screen('/main', PlatformScreen::class)
-    ->name('platform.main');
+	->name('platform.main');
+
+// Platform > System > Code
+Route::screen('/codes', CodeListScreen::class)
+	->name('platform.systems.codes')
+	->breadcrumbs(fn(Trail $trail) => $trail
+		->parent('platform.index')
+		->push('Codes', route('platform.systems.codes')));
+
+// Platform > System > Code > Create
+Route::screen('codes/create', CodeEditScreen::class)
+	->name('platform.systems.codes.create')
+	->breadcrumbs(fn(Trail $trail) => $trail
+		->parent('platform.systems.codes')
+		->push('Create', route('platform.systems.codes.create')));
+
+// Platform > System > Code > Edit
+Route::screen('codes/{code}/edit', CodeEditScreen::class)
+	->name('platform.systems.codes.edit')
+	->breadcrumbs(fn(Trail $trail, Code $code) => $trail
+		->parent('platform.systems.codes')
+		->push($code->id, route('platform.systems.codes.edit', $code)));
 
 // Platform > Profile
 Route::screen('profile', UserProfileScreen::class)
-    ->name('platform.profile')
-    ->breadcrumbs(fn (Trail $trail) => $trail
-        ->parent('platform.index')
-        ->push(__('Profile'), route('platform.profile')));
+	->name('platform.profile')
+	->breadcrumbs(fn(Trail $trail) => $trail
+		->parent('platform.index')
+		->push(__('Profile'), route('platform.profile')));
 
 // Platform > System > Users > User
 Route::screen('users/{user}/edit', UserEditScreen::class)

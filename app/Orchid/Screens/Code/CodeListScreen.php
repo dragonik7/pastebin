@@ -3,19 +3,19 @@
 namespace App\Orchid\Screens\Code;
 
 use App\Models\Code;
-use App\Models\User;
 use App\Orchid\Layouts\Code\CodeListLayout;
 use Orchid\Screen\Action;
-use Orchid\Screen\Fields\Relation;
+use Orchid\Screen\Actions\Link;
 use Orchid\Screen\Layout;
 use Orchid\Screen\Screen;
 
 class CodeListScreen extends Screen
 {
-    /**
-     * Fetch data to be displayed on the screen.
-     *
-     * @return array
+
+	/**
+	 * Fetch data to be displayed on the screen.
+	 *
+	 * @return array
      */
     public function query(): iterable
     {
@@ -48,11 +48,13 @@ class CodeListScreen extends Screen
      * @return Action[]
      */
     public function commandBar(): iterable
-    {
-        return [
-
+	{
+		return [
+			Link::make(__('Add'))
+				->icon('plus')
+				->route('platform.systems.codes.create'),
 		];
-    }
+	}
 
     /**
      * The screen's layout elements.

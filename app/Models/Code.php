@@ -2,13 +2,11 @@
 
 namespace App\Models;
 
-use App\Enum\CodeAccessState;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Orchid\Filters\Filterable;
-use Orchid\Screen\AsMultiSource;
 use Orchid\Screen\AsSource;
 
 class Code extends Model
@@ -17,7 +15,7 @@ class Code extends Model
 	use HasUuids, HasFactory, Filterable, AsSource;
 
 	protected $fillable = [
-		'code',
+		'text',
 		'access',
 		'user_id',
 		'expiration_time',
@@ -41,7 +39,6 @@ class Code extends Model
 		'updated_at',
 	];
 	protected $casts = [
-		'access' => CodeAccessState::class,
 		'created_at' => 'datetime:Y-m-d H:i:s',
 		'updated_at' => 'datetime:Y-m-d H:i:s',
 	];

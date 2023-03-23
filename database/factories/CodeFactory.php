@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Enum\CodeAccessState;
 use App\Models\Code;
 use App\Models\Language;
 use App\Models\User;
@@ -17,7 +16,7 @@ class CodeFactory extends Factory
 	public function definition(): array
 	{
 		return [
-			'code'            => $this->faker->sentence(20, 30),
+			'text'            => $this->faker->sentence(20, 30),
 			'user_id'         => User::query()->get()->random()->id,
 			'access'          => $this->faker->randomElement(['public', 'unlisted', 'private']),
 			'expiration_time' => Carbon::now(),
