@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Sanctum\HasApiTokens;
 use Orchid\Platform\Models\User as Authenticatable;
 
 class User extends Authenticatable
 {
-	use HasApiTokens;
+	use HasApiTokens, SoftDeletes;
     /**
      * The attributes that are mass assignable.
      *
