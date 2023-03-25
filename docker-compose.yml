@@ -20,7 +20,8 @@ services:
         volumes:
             - '.:/var/www/html'
         networks:
-            - pastebin
+            pastebin:
+                ipv4_address: '${APP_HOST:-172.21.0.2}'
         depends_on:
             - pgsql
     pgsql:
@@ -36,14 +37,20 @@ services:
             - './database/data:/var/lib/postgresql/data'
             - './vendor/laravel/sail/database/pgsql/create-testing-database.sql:/docker-entrypoint-initdb.d/10-create-testing-database.sql'
         networks:
-            - pastebin
+            pastebin:
+                ipv4_address: '${DB_HOST:-172.21.0.3}'
+
         healthcheck:
-            test: ['CMD', 'pg_isready', '-q', '-d', '${DB_DATABASE}', '-U', '${DB_USERNAME}']
+            test: [ 'CMD', 'pg_isready', '-q', '-d', '${DB_DATABASE}', '-U', '${DB_USERNAME}' ]
             retries: 3
             timeout: 5s
 networks:
     pastebin:
         driver: bridge
+        ipam:
+            config:
+                -   subnet: 172.21.0.0/16
+                    gateway: 172.21.0.1
 volumes:
     pastebin-pgsql:
         driver: local
