@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Code;
+use App\Models\Report;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,5 +19,6 @@ class DatabaseSeeder extends Seeder
          \App\Models\User::factory(20)->create();
 		$this->call(LanguageSeeder::class);
 		Code::factory(20)->create();
+		Report::factory(20)->create();
     }
 }

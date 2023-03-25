@@ -31,12 +31,15 @@ class PlatformProvider extends OrchidServiceProvider
 			Menu::make(__('Users'))
 				->icon('user')
 				->route('platform.systems.users')
-				->permission('platform.systems.users')
-				->title(__('Access rights')),
+				->permission('platform.systems.users'),
 
 			Menu::make('Codes')
 				->icon('code')
 				->route('platform.systems.codes'),
+
+			Menu::make('Reports')
+				->icon('flag')
+				->route('platform.systems.reports'),
 
 			Menu::make(__('Roles'))
 				->icon('lock')
