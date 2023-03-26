@@ -2,27 +2,24 @@
 
 namespace App\Repository\Code;
 
-use App\Enum\CodeAccessState;
 use App\Models\Code;
 use App\Repository\Code\Interface\CodeRepositoryInterface;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 
 class CodeRepository implements CodeRepositoryInterface
 {
 
-	public function getList()
+	/**
+	 * @return Builder
+	 */
+	public function getList(): Builder
 	{
 		return Code::query()->where(function ($query)
 		{
 			$query->where('expiration_time', '>', Carbon::now())
 				->orWhereNull('expiration_time', '>', Carbon::now());
 		})
-			->where('access', '=', CodeAccessState::Public->value);
-	}
-
-	public function show()
-	{
-
-		return Code::first();
+			->orderBy('created_at', 'asc');
 	}
 }

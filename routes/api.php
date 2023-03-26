@@ -29,8 +29,7 @@ Route::group(['prefix' => '/user'], function ()
 Route::group(['prefix' => '/code'], function () use ($user)
 {
 	Route::get('/', [CodesController::class, 'getPublicCodes']);
+	Route::get('/created', [CodesController::class, 'getCreatedCodes'])->middleware('auth:sanctum');
 	Route::post('/', [CodesController::class, 'store'])->middleware($user);
 	Route::get('/{code}', [CodesController::class, 'show'])->middleware($user);
-	Route::post('/{code}', [CodesController::class, 'update']);
-	Route::delete('/{code}', [CodesController::class, 'destroy']);
 });
