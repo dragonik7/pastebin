@@ -2,17 +2,17 @@
 
 namespace App\Http\Service;
 
-use App\Http\Requests\Code\CreateCodeRequest;
+use App\Http\Requests\Code\CodeCreateRequest;
 use App\Models\Code;
 
 class CodeService
 {
 
 	/**
-	 * @param  CreateCodeRequest  $codeRequest
+	 * @param  CodeCreateRequest  $codeRequest
 	 * @return Code
 	 */
-	public function create(CreateCodeRequest $codeRequest)
+	public function create(CodeCreateRequest $codeRequest)
 	{
 		$data = $codeRequest->all();
 		return Code::create($data);

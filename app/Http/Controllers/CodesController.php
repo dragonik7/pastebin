@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enum\CodeAccessState;
-use App\Http\Requests\Code\CreateCodeRequest;
+use App\Http\Requests\Code\CodeCreateRequest;
 use App\Http\Resources\Code\CodeResource;
 use App\Http\Service\CodeService;
 use App\Models\Code;
@@ -47,11 +47,11 @@ class CodesController extends Controller
 	}
 
 	/**
-	 * @param  CreateCodeRequest  $codeRequest
+	 * @param  CodeCreateRequest  $codeRequest
 	 * @param  CodeService  $codeService
 	 * @return CodeResource
 	 */
-	public function store(CreateCodeRequest $codeRequest, CodeService $codeService)
+	public function store(CodeCreateRequest $codeRequest, CodeService $codeService)
 	{
 		$code = $codeService->create($codeRequest);
 		return CodeResource::make($code);

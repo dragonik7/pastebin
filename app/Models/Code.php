@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Orchid\Filters\Filterable;
 use Orchid\Screen\AsSource;
 
@@ -65,4 +66,13 @@ class Code extends Model
 	{
 		return $this->belongsTo(Language::class);
 	}
+
+	/**
+	 * @phpstan-return HasMany<Report,Code>
+	 */
+	public function reports(): HasMany
+	{
+		return $this->hasMany(Report::class, 'code_id');
+	}
+
 }

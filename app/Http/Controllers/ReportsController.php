@@ -2,38 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Report;
-use Illuminate\Http\Request;
+use App\Http\Requests\Report\ReportCreateRequest;
+use App\Http\Resources\Report\ReportResource;
+use App\Http\Service\ReportService;
+use App\Models\Code;
 
 class ReportsController extends Controller
 {
 
-	public function index()
+	/**
+	 * @param  Code  $code
+	 * @param  ReportCreateRequest  $request
+	 * @param  ReportService  $reportService
+	 * @return ReportResource
+	 */
+	public function store(Code $code, ReportCreateRequest $request, ReportService $reportService)
 	{
-		
-	}
-
-	public function create()
-	{
-	}
-
-	public function store(Request $request)
-	{
-	}
-
-	public function show(Report $report)
-	{
-	}
-
-	public function edit(Report $report)
-	{
-	}
-
-	public function update(Request $request, Report $report)
-	{
-	}
-
-	public function destroy(Report $report)
-	{
+		$report = $reportService->create($code, $request);
+		return ReportResource::make($report);
 	}
 }
