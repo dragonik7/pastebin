@@ -14,7 +14,7 @@ class CodeResource extends JsonResource
 
 	/**
 	 * @param  Request  $request
-	 * @return array
+	 * @return array<string, string|JsonResource>
 	 */
 	public function toArray($request)
 	{

@@ -2,10 +2,14 @@
 
 namespace App\Repository\Code\Interface;
 
+use App\Models\Code;
 use Illuminate\Database\Eloquent\Builder;
 
 interface CodeRepositoryInterface
 {
 
-	public function getList(): Builder;
+	/**
+	 * @return Builder<Code>
+	 */
+	public function getList();
 }

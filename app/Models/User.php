@@ -71,6 +71,7 @@ class User extends Authenticatable
 		'created_at',
 	];
 
+	/** @return Attribute<string[], string[]> */
 	public function password(): Attribute
 	{
 		return Attribute::make(

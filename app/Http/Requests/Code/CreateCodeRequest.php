@@ -4,11 +4,15 @@ namespace App\Http\Requests\Code;
 
 use App\Enum\CodeAccessState;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules\Enum;
 
 class CreateCodeRequest extends FormRequest
 {
 
+	/**
+	 * @return array<string,array<int,Enum|string>>
+	 */
 	public function rules(): array
 	{
 		return [
@@ -21,6 +25,6 @@ class CreateCodeRequest extends FormRequest
 
 	protected function passedValidation()
 	{
-		$this->merge(['user_id' => \Auth::id()]);
+		$this->merge(['user_id' => Auth::id()]);
 	}
 }

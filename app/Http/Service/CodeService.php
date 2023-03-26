@@ -8,6 +8,10 @@ use App\Models\Code;
 class CodeService
 {
 
+	/**
+	 * @param  CreateCodeRequest  $codeRequest
+	 * @return Code
+	 */
 	public function create(CreateCodeRequest $codeRequest)
 	{
 		$data = $codeRequest->all();

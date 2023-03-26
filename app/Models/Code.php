@@ -22,7 +22,10 @@ class Code extends Model
 		'language_id',
 	];
 
-	protected $allowedFilters = [
+	/**
+	 * @var string[]
+	 */
+	protected array $allowedFilters = [
 		'user_id',
 		'access',
 		'created_at',
@@ -30,25 +33,34 @@ class Code extends Model
 	];
 
 	/**
-	 * @var array
+	 * @var string[]
 	 */
-	protected $allowedSorts = [
+	protected array $allowedSorts = [
 		'access',
 		'user_id',
 		'created_at',
 		'updated_at',
 	];
-	protected $casts        = [
+	/**
+	 * @var array<string,string>
+	 */
+	protected $casts = [
 		'expiration_time' => 'datetime:Y-m-d H:i:s',
 		'created_at'      => 'datetime:Y-m-d H:i:s',
 		'updated_at'      => 'datetime:Y-m-d H:i:s',
 	];
 
+	/**
+	 * @phpstan-return BelongsTo<User,Code>
+	 */
 	public function user(): BelongsTo
 	{
 		return $this->belongsTo(User::class);
 	}
 
+	/**
+	 * @phpstan-return BelongsTo<Language,Code>
+	 */
 	public function language(): BelongsTo
 	{
 		return $this->belongsTo(Language::class);

@@ -11,14 +11,14 @@ class CodeRepository implements CodeRepositoryInterface
 {
 
 	/**
-	 * @return Builder
+	 * @return Builder<Code>
 	 */
 	public function getList(): Builder
 	{
 		return Code::query()->where(function ($query)
 		{
 			$query->where('expiration_time', '>', Carbon::now())
-				->orWhereNull('expiration_time', '>', Carbon::now());
+				->orWhereNull('expiration_time');
 		})
 			->orderBy('created_at', 'asc');
 	}
